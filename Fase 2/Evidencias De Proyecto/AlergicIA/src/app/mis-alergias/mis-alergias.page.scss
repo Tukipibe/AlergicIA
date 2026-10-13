@@ -1,0 +1,40 @@
+:host { display: block; height: 100%; }
+
+h2 { margin: 0 0 4px; font-size: 30px; font-weight: 800; letter-spacing: -0.02em; color: var(--st-primario-claro); }
+.descripcion { margin: 0 0 20px; color: var(--st-suave); }
+
+.lista {
+  list-style: none; margin: 0 0 20px; padding: 0; display: grid; gap: 8px;
+  li {
+    display: flex; align-items: center; justify-content: space-between;
+    background: var(--st-superficie); padding: 10px 8px 10px 14px; border-radius: 10px;
+    border: 1px solid var(--st-linea);
+  }
+  strong { display: block; color: var(--st-texto); }
+}
+
+.nivel {
+  display: inline-block; margin-top: 2px; font-size: 13px; font-weight: 600;
+  &.grave { color: var(--st-alerta); }
+  &.moderada { color: var(--st-moderada); }
+  &.leve { color: var(--st-suave); }
+}
+
+ion-button { --border-radius: 10px; margin: 0; text-transform: none; font-weight: 600; }
+
+.vacio { color: var(--st-suave); margin: 0 0 20px; }
+.error { margin: 0; color: var(--st-alerta); font-size: 14px; }
+
+.nueva {
+  display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px;
+  ion-input { --border-radius: 10px; }
+  ion-segment { --background: var(--st-superficie); border-radius: 10px; }
+}
+
+.sugeridas {
+  display: flex; flex-wrap: wrap; gap: 8px;
+  button {
+    padding: 6px 14px; border-radius: 999px; cursor: pointer; font: inherit;
+    background: var(--st-superficie); color: var(--st-primario-claro); border: 1px solid var(--st-linea);
+  }
+}

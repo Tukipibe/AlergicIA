@@ -1,0 +1,50 @@
+<ion-split-pane contentId="main">
+  <ion-menu contentId="main">
+    <ion-content>
+      <div class="cabecera">
+        <strong>AlergicIA</strong>
+        <span>{{ sesion.usuario()?.nombre }}</span>
+      </div>
+
+      <ion-list lines="none">
+        <ion-menu-toggle autoHide="false">
+          <ion-item routerLink="/home" routerLinkActive="activo" [routerLinkActiveOptions]="{exact:true}" detail="false">
+            <ion-icon slot="start" name="home-outline"></ion-icon>
+            <ion-label>Inicio</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle autoHide="false">
+          <ion-item routerLink="/mis-alergias" routerLinkActive="activo" detail="false">
+            <ion-icon slot="start" name="alert-circle-outline"></ion-icon>
+            <ion-label>Mis alergias</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle autoHide="false">
+          <ion-item routerLink="/escanear" routerLinkActive="activo" detail="false">
+            <ion-icon slot="start" name="scan-outline"></ion-icon>
+            <ion-label>Escanear alimento</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle autoHide="false">
+          <ion-item routerLink="/perfil" routerLinkActive="activo" detail="false">
+            <ion-icon slot="start" name="person-outline"></ion-icon>
+            <ion-label>Perfil</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+      </ion-list>
+
+      <ion-list lines="none" class="pie">
+        <ion-menu-toggle autoHide="false">
+          <ion-item routerLink="/login" detail="false" (click)="sesion.salir()">
+            <ion-icon slot="start" name="log-out-outline"></ion-icon>
+            <ion-label>Cerrar sesión</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+
+  <div class="ion-page" id="main">
+    <ion-router-outlet></ion-router-outlet>
+  </div>
+</ion-split-pane>

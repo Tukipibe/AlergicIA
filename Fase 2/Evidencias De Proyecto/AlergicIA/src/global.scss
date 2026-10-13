@@ -1,0 +1,63 @@
+@import "@ionic/angular/css/core.css";
+@import "@ionic/angular/css/normalize.css";
+@import "@ionic/angular/css/structure.css";
+@import "@ionic/angular/css/typography.css";
+@import "@ionic/angular/css/padding.css";
+@import "@ionic/angular/css/float-elements.css";
+@import "@ionic/angular/css/text-alignment.css";
+@import "@ionic/angular/css/text-transformation.css";
+@import "@ionic/angular/css/flex-utils.css";
+@import "@ionic/angular/css/display.css";
+
+:root {
+  --st-fondo: #0D0B14;
+  --st-superficie: #1A1626;
+  --st-superficie-alta: #241F35;
+  --st-linea: #332C49;
+  --st-texto: #F2EFFA;
+  --st-suave: #A89FC2;
+
+  --st-primario: #8B5CF6;
+  --st-primario-claro: #C4B5FD;
+  --st-primario-oscuro: #6D28D9;
+
+  --st-seguro: #34D399;
+  --st-alerta: #FB7185;
+  --st-alerta-suave: rgba(251, 113, 133, 0.16);
+  --st-moderada: #FBBF24;
+
+  --ion-background-color: var(--st-fondo);
+  --ion-background-color-rgb: 13, 11, 20;
+  --ion-text-color: var(--st-texto);
+  --ion-text-color-rgb: 242, 239, 250;
+  --ion-toolbar-background: var(--st-superficie);
+  --ion-item-background: transparent;
+  --ion-border-color: var(--st-linea);
+
+  --ion-color-primary: #8B5CF6;
+  --ion-color-primary-rgb: 139, 92, 246;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
+  --ion-color-primary-shade: #7A4FD9;
+  --ion-color-primary-tint: #9A6DF7;
+
+  --ion-color-medium: #A89FC2;
+  --ion-color-danger: #FB7185;
+}
+
+ion-content {
+  --background: var(--st-fondo);
+  --color: var(--st-texto);
+}
+
+ion-toolbar {
+  --background: var(--st-superficie);
+  --color: var(--st-texto);
+  --border-color: var(--st-linea);
+}
+
+ion-input {
+  --background: var(--st-superficie);
+  --color: var(--st-texto);
+  --placeholder-color: var(--st-suave);
+}

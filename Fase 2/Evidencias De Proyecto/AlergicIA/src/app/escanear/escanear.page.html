@@ -1,0 +1,55 @@
+<app-shell titulo="Escanear alimento">
+  <h2>Escanear un alimento</h2>
+  <p class="descripcion">Escribe el nombre del alimento o plato para revisar si contiene alguno de tus alérgenos.</p>
+
+  @if (sesion.alergias.length === 0) {
+    <div class="resultado peligro">
+      <strong>Primero registra tus alergias</strong>
+      <p>Sin alergias en tu perfil no hay nada que vigilar. <a routerLink="/mis-alergias">Agrégalas aquí</a>.</p>
+    </div>
+  } @else {
+    <div class="buscador">
+      <ion-input placeholder="Ej: galletas de avena" fill="outline" [(ngModel)]="alimento" (keyup.enter)="revisar()"></ion-input>
+      <ion-button [disabled]="cargando || !alimento.trim()" (click)="revisar()">
+        @if (cargando) {
+          <ion-spinner slot="start" name="dots"></ion-spinner>
+          Analizando…
+        } @else {
+          <ion-icon slot="start" name="search-outline"></ion-icon>
+          Revisar
+        }
+      </ion-button>
+    </div>
+  }
+
+  @if (error) {
+    <div class="resultado peligro">
+      <strong>No se pudo analizar</strong>
+      <p>{{ error }}</p>
+    </div>
+  }
+
+  @if (resultado; as r) {
+    <div class="resultado" [class.peligro]="r.coincidencias.length > 0">
+      <strong>{{ r.alimento }}</strong>
+      <p>{{ r.resumen }}</p>
+
+      @if (r.coincidencias.length) {
+        <ul class="coincidencias">
+          @for (c of r.coincidencias; track c.alergia) {
+            <li><b>{{ c.alergia }}</b> · {{ etiquetas[c.tipo] }}<span>{{ c.motivo }}</span></li>
+          }
+        </ul>
+      }
+
+      @if (r.ingredientes.length) {
+        <span class="sub">Ingredientes probables</span>
+        <div class="ingredientes">
+          @for (i of r.ingredientes; track $index) { <span>{{ i }}</span> }
+        </div>
+      }
+    </div>
+
+    <p class="nota">Resultado generado por una IA y puede contener errores. Revisa siempre la etiqueta del producto y, si tu alergia es grave, consulta a tu médico.</p>
+  }
+</app-shell>

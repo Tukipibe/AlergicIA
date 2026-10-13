@@ -1,0 +1,23 @@
+:host { display: block; height: 100%; }
+
+.tarjeta {
+  display: flex; align-items: center; gap: 14px;
+  background: var(--st-superficie); border-radius: 10px; padding: 16px; margin-bottom: 20px;
+  border: 1px solid var(--st-linea);
+  ion-icon { font-size: 48px; color: var(--st-primario-claro); }
+  strong { display: block; color: var(--st-texto); }
+  span { color: var(--st-suave); font-size: 14px; }
+}
+
+.datos {
+  list-style: none; margin: 0 0 24px; padding: 0; display: grid; gap: 8px;
+  li {
+    display: flex; justify-content: space-between;
+    background: var(--st-superficie); padding: 12px 14px; border-radius: 10px;
+    border: 1px solid var(--st-linea);
+    span { color: var(--st-suave); }
+    strong { color: var(--st-texto); }
+  }
+}
+
+ion-button { --border-radius: 10px; margin: 0 0 10px; text-transform: none; font-weight: 600; }

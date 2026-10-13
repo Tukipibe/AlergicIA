@@ -1,0 +1,22 @@
+AlergicIA - Ionic + Angular
+
+Requisitos: Node.js 20.12 o superior (https://nodejs.org, version LTS).
+
+Puesta en marcha (en la carpeta del proyecto):
+  1. npm install
+  2. En una terminal:   npm run api     (servidor de IA, puerto 3000)
+  3. En otra terminal:  npm start       (app en http://localhost:8100)
+
+Como funciona:
+  - Cuentas: "Crear cuenta" en el login. Cada usuario guarda sus alergias y su
+    historial de revisiones en el navegador (localStorage). Es provisional.
+  - Mis alergias: agregar / quitar alergias con nivel (Leve, Moderada, Grave).
+  - Escanear alimento: la app envia el alimento y tus alergias a server/server.js,
+    que consulta a Gemini y responde si el alimento (o alguno de sus ingredientes,
+    incluidos los ocultos) afecta alguna de tus alergias.
+  - La clave de la IA vive solo en el servidor (.env), nunca en la app.
+  - Cambiar de modelo: variable GEMINI_MODEL en .env (por defecto gemini-3.8-flash).
+  - La disponibilidad de modelos y los límites gratuitos dependen de Google AI Studio y pueden cambiar.
+
+Pendiente para produccion: autenticacion real en un backend, limite de consultas
+por usuario en el servidor y desplegar server/server.js.

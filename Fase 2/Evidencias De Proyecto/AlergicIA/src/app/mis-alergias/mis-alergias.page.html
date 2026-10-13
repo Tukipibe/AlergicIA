@@ -1,0 +1,45 @@
+<app-shell titulo="Mis alergias">
+  <h2>Mis alergias</h2>
+  <p class="descripcion">Estos son los alimentos que tu app va a vigilar al escanear.</p>
+
+  @if (sesion.alergias.length === 0) {
+    <p class="vacio">Aún no registras alergias. Agrega la primera abajo.</p>
+  }
+
+  <ul class="lista">
+    @for (a of sesion.alergias; track a.nombre) {
+      <li>
+        <div>
+          <strong>{{ a.nombre }}</strong>
+          <span class="nivel" [class]="a.nivel.toLowerCase()">{{ a.nivel }}</span>
+        </div>
+        <ion-button fill="clear" size="small" color="medium" (click)="quitar(a.nombre)">
+          <ion-icon slot="icon-only" name="close-outline"></ion-icon>
+        </ion-button>
+      </li>
+    }
+  </ul>
+
+  <div class="nueva">
+    <ion-input placeholder="Ej: Maní, huevo, kiwi…" fill="outline" [(ngModel)]="nombre" (keyup.enter)="agregar()"></ion-input>
+    <ion-segment [(ngModel)]="nivel">
+      @for (n of niveles; track n) {
+        <ion-segment-button [value]="n"><ion-label>{{ n }}</ion-label></ion-segment-button>
+      }
+    </ion-segment>
+    <ion-button expand="block" fill="outline" [disabled]="!nombre.trim()" (click)="agregar()">
+      <ion-icon slot="start" name="add-outline"></ion-icon>
+      Agregar alergia
+    </ion-button>
+    @if (mensaje) { <p class="error">{{ mensaje }}</p> }
+  </div>
+
+  @if (sugeridas.length) {
+    <p class="descripcion">Comunes (se agregan con el nivel elegido):</p>
+    <div class="sugeridas">
+      @for (s of sugeridas; track s) {
+        <button type="button" (click)="agregar(s)">+ {{ s }}</button>
+      }
+    </div>
+  }
+</app-shell>

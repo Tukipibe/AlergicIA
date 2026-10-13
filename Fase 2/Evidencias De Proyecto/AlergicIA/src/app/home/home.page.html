@@ -1,0 +1,21 @@
+<app-shell titulo="Inicio">
+  <h2>Tus alergias</h2>
+  <div class="chips">
+    @for (a of sesion.alergias; track a.nombre) {
+      <span class="chip">{{ a.nombre }}</span>
+    } @empty {
+      <a class="vacio" routerLink="/mis-alergias">Aún no registras alergias. Agrégalas aquí.</a>
+    }
+  </div>
+
+  <ion-button expand="block" size="large" routerLink="/escanear">Escanear un alimento</ion-button>
+
+  <h3>Revisados recientemente</h3>
+  <ul class="lista">
+    @for (r of recientes; track r.fecha) {
+      <li [class.peligro]="r.peligro">{{ r.alimento }} <span>{{ r.detalle }}</span></li>
+    } @empty {
+      <li>Todavía no has revisado ningún alimento.</li>
+    }
+  </ul>
+</app-shell>
