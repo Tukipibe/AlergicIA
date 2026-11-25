@@ -1,0 +1,16 @@
+# Despliegue en Render (https://render.com): New > Blueprint, apuntando a este repositorio.
+services:
+  - type: web
+    name: alergicia-api
+    runtime: node
+    rootDir: server
+    buildCommand: echo "sin dependencias"
+    startCommand: node server.js
+    healthCheckPath: /health
+    envVars:
+      - key: GEMINI_API_KEY
+        sync: false   # la pegas en el panel de Render, nunca en el repositorio
+      - key: GEMINI_MODEL
+        value: gemini-3.5-flash-lite
+      - key: TRUST_PROXY
+        value: "1"

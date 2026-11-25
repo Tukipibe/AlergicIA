@@ -1,0 +1,25 @@
+<app-shell titulo="Perfil">
+  <div class="tarjeta">
+    <ion-icon name="person-circle-outline"></ion-icon>
+    <div>
+      <strong>{{ sesion.usuario()?.nombre }}</strong>
+      <span>{{ sesion.usuario()?.email }}</span>
+    </div>
+  </div>
+
+  <ul class="datos">
+    <li><span>Edad</span><strong>—</strong></li>
+    <li><span>Alergias registradas</span><strong>{{ sesion.alergias.length }}</strong></li>
+    <li><span>Alimentos revisados</span><strong>{{ sesion.historial.length }}</strong></li>
+  </ul>
+
+  <ion-button expand="block" fill="outline">
+    <ion-icon slot="start" name="create-outline"></ion-icon>
+    Editar perfil
+  </ion-button>
+
+  <ion-button expand="block" fill="clear" color="danger" routerLink="/login" (click)="sesion.salir()">
+    <ion-icon slot="start" name="log-out-outline"></ion-icon>
+    Cerrar sesión
+  </ion-button>
+</app-shell>

@@ -1,0 +1,35 @@
+{
+  "name": "alergicia",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "ng serve --port 8100 --open",
+    "build": "ng build",
+    "api": "node server/server.js",
+    "build:android": "ng build && npx cap sync android",
+    "android": "npx cap open android"
+  },
+  "dependencies": {
+    "@angular/common": "~20.3.0",
+    "@angular/compiler": "~20.3.0",
+    "@angular/core": "~20.3.0",
+    "@angular/forms": "~20.3.0",
+    "@angular/platform-browser": "~20.3.0",
+    "@angular/router": "~20.3.0",
+    "@capacitor-mlkit/barcode-scanning": "^8.2.2",
+    "@capacitor/android": "^8.6.2",
+    "@capacitor/core": "^8.6.2",
+    "@ionic/angular": "^8.7.0",
+    "ionicons": "^8.0.0",
+    "rxjs": "~7.8.0",
+    "tslib": "^2.6.0",
+    "zone.js": "~0.15.0"
+  },
+  "devDependencies": {
+    "@angular/build": "~20.3.0",
+    "@angular/cli": "20.3.38",
+    "@angular/compiler-cli": "~20.3.0",
+    "@capacitor/cli": "^8.6.2",
+    "typescript": "~5.8.0"
+  }
+}

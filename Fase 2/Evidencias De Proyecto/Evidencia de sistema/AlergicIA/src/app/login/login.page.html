@@ -1,0 +1,23 @@
+<div class="ion-page">
+<ion-content>
+  <main class="login">
+    <h1>AlergicIA</h1>
+    <p class="lema">Sabe qué hay en tu plato antes de comerlo.</p>
+
+    @if (modoRegistro) {
+      <ion-input label="Nombre" labelPlacement="floating" fill="outline" [(ngModel)]="nombre"></ion-input>
+    }
+    <ion-input label="Correo electrónico" labelPlacement="floating" fill="outline" type="email" [(ngModel)]="email"></ion-input>
+    <ion-input label="Contraseña" labelPlacement="floating" fill="outline" type="password" [(ngModel)]="clave" (keyup.enter)="enviar()"></ion-input>
+
+    @if (error) { <p class="error">{{ error }}</p> }
+
+    <ion-button expand="block" size="large" [disabled]="cargando" (click)="enviar()">
+      {{ modoRegistro ? 'Crear cuenta' : 'Iniciar sesión' }}
+    </ion-button>
+    <ion-button expand="block" fill="clear" (click)="cambiarModo()">
+      {{ modoRegistro ? 'Ya tengo cuenta' : 'Crear cuenta' }}
+    </ion-button>
+  </main>
+</ion-content>
+</div>

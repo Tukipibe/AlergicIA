@@ -1,0 +1,7 @@
+{
+  "name": "alergicia-api",
+  "version": "1.0.0",
+  "private": true,
+  "engines": { "node": ">=20.12" },
+  "scripts": { "start": "node server.js" }
+}

@@ -1,0 +1,39 @@
+AlergicIA - Ionic + Angular + Capacitor (APK Android)
+
+ARQUITECTURA
+  - App (APK): interfaz Ionic/Angular empaquetada con Capacitor. Cuentas, alergias e
+    historial se guardan LOCALMENTE en el teléfono (localStorage del WebView).
+  - Servidor (server/server.js): unico lugar donde vive la clave de Gemini. La app le
+    envia el alimento y tus alergias por HTTPS. No guarda nada.
+  - Escaner: en el APK usa el lector nativo de Google ML Kit; en el navegador, BarcodeDetector.
+
+1) DESPLEGAR EL SERVIDOR (una vez)
+  - Sube este proyecto a GitHub y en https://render.com crea un "Blueprint" (usa render.yaml).
+  - En el panel de Render pega GEMINI_API_KEY (crea una nueva en https://aistudio.google.com/apikey).
+  - Prueba: https://TU-SERVIDOR.onrender.com/health  ->  {"ok":true}
+  - El plan gratis de Render se "duerme": la primera consulta tras un rato puede tardar ~30-60 s.
+  - Variables opcionales: ALLOWED_ORIGINS, RATE_LIMIT_MAX (30), RATE_LIMIT_WINDOW_MS (900000).
+
+2) APUNTAR LA APP A TU SERVIDOR
+  - Edita src/environments/environment.production.ts y pon tu URL https.
+
+3) GENERAR EL APK
+  Opcion A - Android Studio (instalar desde https://developer.android.com/studio):
+    npm install
+    npm run build:android      (compila la web y la copia a android/)
+    npm run android            (abre Android Studio)
+    Build > Build APK(s)  ->  android/app/build/outputs/apk/debug/app-debug.apk
+  Opcion B - Sin instalar nada: sube el proyecto a GitHub, pestana Actions >
+    "Build APK" > Run workflow, y descarga el artefacto AlergicIA-debug-apk.
+  Instalar: pasa el .apk al telefono y permite "instalar apps de origen desconocido".
+  (Para Google Play necesitaras un APK/AAB firmado: Build > Generate Signed Bundle.)
+
+DESARROLLO EN EL PC
+  Terminal 1: npm run api     (necesita un archivo .env copiado de .env.example)
+  Terminal 2: npm start       (http://localhost:8100, el proxy envia /api al puerto 3000)
+
+IMPORTANTE
+  - Nunca subas el archivo .env ni pegues la clave en el codigo de la app.
+  - Los datos locales se borran si se desinstala la app o se limpia su almacenamiento.
+  - Las contrasenas locales son provisionales; no sirven para sincronizar entre dispositivos.
+  - La informacion de alergenos es orientativa, no una certificacion de seguridad.

@@ -1,0 +1,18 @@
+:host { display: block; height: 100%; }
+
+.login {
+  max-width: 420px;
+  margin: 0 auto;
+  padding: 56px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+h1 { margin: 0; font-size: 44px; line-height: 1; font-weight: 800; letter-spacing: -0.03em; color: var(--st-primario-claro); }
+.lema { margin: 0 0 20px; font-size: 18px; color: var(--st-suave); }
+
+ion-input { --border-radius: 10px; }
+ion-button { --border-radius: 10px; margin: 0; text-transform: none; font-weight: 600; }
+ion-button[fill="clear"] { --color: var(--st-primario-claro); }
+.error { margin: 0; color: var(--st-alerta); font-size: 14px; }

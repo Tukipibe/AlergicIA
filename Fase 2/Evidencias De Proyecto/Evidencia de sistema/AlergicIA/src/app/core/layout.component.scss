@@ -1,0 +1,26 @@
+.cabecera {
+  display: flex; flex-direction: column;
+  padding: 28px 20px 20px;
+  background: var(--st-superficie);
+  border-bottom: 1px solid var(--st-linea);
+  color: var(--st-texto);
+  strong { font-size: 22px; color: var(--st-primario-claro); }
+  span { color: var(--st-suave); font-size: 14px; }
+}
+
+ion-content { --background: var(--st-fondo); }
+
+ion-list { padding: 12px 8px; background: transparent; }
+ion-item {
+  --border-radius: 10px;
+  --background: transparent;
+  --background-hover: var(--st-superficie);
+  --color: var(--st-texto);
+  font-weight: 500;
+  &.activo {
+    --background: var(--st-primario);
+    --color: #fff;
+    font-weight: 700;
+  }
+}
+.pie { border-top: 1px solid var(--st-linea); margin-top: 8px; }

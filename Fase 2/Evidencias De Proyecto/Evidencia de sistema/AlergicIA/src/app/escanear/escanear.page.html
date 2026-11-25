@@ -1,0 +1,76 @@
+<app-shell titulo="Escanear alimento">
+  <h2>Escanear un alimento</h2>
+  <p class="descripcion">Apunta la cámara al código de barras del envase. Buscaremos sus ingredientes y los compararemos con las alergias de tu cuenta.</p>
+
+  @if (sesion.alergias.length === 0) {
+    <div class="resultado peligro">
+      <strong>Primero registra tus alergias</strong>
+      <p>Sin alergias en tu perfil no podemos realizar la comparación. <a routerLink="/mis-alergias">Agrégalas aquí</a>.</p>
+    </div>
+  } @else {
+    <section class="scanner">
+      <div class="scanner-encabezado">
+        <strong><ion-icon name="barcode-outline"></ion-icon> Lector de código de barras</strong>
+        <span>EAN / UPC</span>
+      </div>
+      <div class="visor" [class.video-oculto]="!escaneando" [hidden]="esNativo">
+        <video #camara playsinline muted></video>
+        @if (escaneando) { <div class="marco"><span></span></div> }
+      </div>
+      @if (escaneando) {
+        <ion-button expand="block" fill="outline" color="medium" (click)="detenerCamara()">
+          <ion-icon slot="start" name="stop-circle-outline"></ion-icon> Detener cámara
+        </ion-button>
+        <p class="ayuda">Centra el código de barras dentro del recuadro y mantén el producto quieto.</p>
+      } @else {
+        <ion-button expand="block" (click)="iniciarCamara(esNativo ? undefined : camara)" [disabled]="buscandoProducto || cargando">
+          <ion-icon slot="start" name="camera-outline"></ion-icon> Abrir cámara y escanear
+        </ion-button>
+        <p class="ayuda">@if (esNativo) { Se abrirá el lector del teléfono. Apunta al código de barras del envase. } @else { La cámara trasera se utiliza preferentemente. Se requiere permiso del navegador y HTTPS o localhost. }</p>
+      }
+    </section>
+
+    <div class="separador"><span>o busca manualmente</span></div>
+    <div class="buscador">
+      <ion-input placeholder="Nombre del alimento o código de barras" fill="outline" [(ngModel)]="alimento" (keyup.enter)="revisar()"></ion-input>
+      <div class="acciones">
+        <ion-button [disabled]="cargando || buscandoProducto || !alimento.trim()" (click)="revisar()">
+          <ion-icon slot="start" name="search-outline"></ion-icon> Analizar nombre
+        </ion-button>
+        <ion-button fill="outline" [disabled]="cargando || buscandoProducto || !alimento.trim()" (click)="buscarProducto()">
+          Buscar código
+        </ion-button>
+      </div>
+    </div>
+  }
+
+  @if (buscandoProducto || cargando) {
+    <div class="estado-carga"><ion-spinner name="dots"></ion-spinner><span>{{ buscandoProducto ? 'Buscando información del producto…' : 'Comparando ingredientes con tus alergias…' }}</span></div>
+  }
+
+  @if (error) {
+    <div class="resultado peligro"><strong>No se pudo completar la búsqueda</strong><p>{{ error }}</p></div>
+  }
+
+  @if (resultado; as r) {
+    <div class="resultado" [class.peligro]="r.coincidencias.length > 0">
+      <strong>{{ r.alimento }}</strong>
+      @if (productoCodigo) { <p class="meta">Código: {{ productoCodigo }} @if (productoMarca) { · Marca: {{ productoMarca }} }</p> }
+      <p>{{ r.resumen }}</p>
+      @if (r.coincidencias.length) {
+        <ul class="coincidencias">
+          @for (c of r.coincidencias; track c.alergia) {
+            <li><b>{{ c.alergia }}</b> · {{ etiquetas[c.tipo] }}<span>{{ c.motivo }}</span></li>
+          }
+        </ul>
+      } @else {
+        <p class="sin-coincidencias">No se detectaron coincidencias con las alergias registradas en la información disponible. Esto no garantiza que el producto sea seguro.</p>
+      }
+      @if (r.ingredientes.length) {
+        <span class="sub">Ingredientes identificados por el análisis</span>
+        <div class="ingredientes">@for (i of r.ingredientes; track $index) { <span>{{ i }}</span> }</div>
+      }
+    </div>
+    <p class="nota">La información proviene de Open Food Facts y de un análisis mediante IA. Puede estar incompleta o desactualizada. No es una certificación de seguridad: revisa siempre el envase, las advertencias de trazas y la información del fabricante. Ante una alergia grave, no consumas el producto si existe duda.</p>
+  }
+</app-shell>
